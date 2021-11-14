@@ -35,6 +35,18 @@
                                     Cadastrar cliente
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/pedidos">
+                                    <span data-feather="users"></span>
+                                    Listar pedidos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/pedido">
+                                    <span data-feather="users"></span>
+                                    Cadastrar pedido
+                                </a>
+                            </li>
                         </ul>                        
                     </div>
                 </nav>

@@ -1,5 +1,7 @@
-<template>
+<template>    
     <div>
+        <teleport to="head">
+        </teleport>
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/home">SAStore</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button"
@@ -16,7 +18,7 @@
         </main>
     </div>
 </template>
-<script>
+<script charset="utf-8">
     import 'bootstrap/dist/js/bootstrap.bundle.min.js'
     import '../assets/js/site.js'
     import NavigationContent from './navigation.vue'
@@ -28,8 +30,10 @@
             let featherScript = document.createElement('script')
             featherScript.setAttribute('src', 'https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js')
             document.body.appendChild(featherScript)
+
+            document.documentElement.setAttribute('lang', 'pt-br')
         }
-    }    
+    }
 </script>
 <style scoped>
     @import '../assets/css/site.css';

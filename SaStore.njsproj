@@ -46,7 +46,16 @@
     <Content Include="src\components\Home.vue" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="src\components\ItemPedido.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\NotFound.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\PedidoEdit.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\PedidoList.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\ProdutoEdit.vue">

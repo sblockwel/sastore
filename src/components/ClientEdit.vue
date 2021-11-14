@@ -47,7 +47,7 @@
                         .catch((error) => {
                             // error.response.status Check status code
                         }).finally(() => {
-                            this.$router.push({ name: 'listar_cliente' });
+                            this.$router.push({ name: 'listar_clientes' });
                         });
                 } else {
                     axios.post('http://192.168.1.22:8080/cliente/', this.cliente)
@@ -57,7 +57,7 @@
                         .catch((error) => {
                             // error.response.status Check status code
                         }).finally(() => {
-                            this.$router.push({ name: 'listar_cliente' });
+                            this.$router.push({ name: 'listar_clientes' });
                         });
                 }
 

@@ -1,5 +1,7 @@
 <template>
     <div class="container">
+        <meta charset="utf-8">
+
         <table class="table table-dark table-striped">
             <thead>
                 <tr>
@@ -50,7 +52,7 @@
                     .then(x => this.produto_list = x.data);
             },
             alterar(id) {
-
+                this.$router.push({ name: 'editar_produto', params: { id } });
             }
         }
     };
