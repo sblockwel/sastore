@@ -13,7 +13,7 @@
                 <tr v-for="pedido in pedido_list" :key="pedido.numero">
                     <th scope="row">{{ pedido.numero }}</th>
                     <th scope="row">{{ pedido.cliente.nome }}</th>
-                    <td scope="row">{{ pedido.valor_total }}</td>
+                    <td scope="row">{{ pedido.valorTotal }}</td>
                     <td>
                         <button @click="remover(pedido.numero)"> <font-awesome-icon data-feather="trash" />Excluir</button>
                         <button @click="alterar(pedido.numero)"> <font-awesome-icon icon="edit" />Editar</button>
@@ -37,7 +37,9 @@
         mounted() {
             try {
                 axios.get('http://192.168.1.22:8080/pedido')
-                    .then(x => this.pedido_list = x.data);
+                    .then(x => {
+                        this.pedido_list = x.data;                        
+                    });
                 console.log(this.pedido_list);
             } catch (e) {
                 console.error(e);
@@ -55,7 +57,7 @@
             },
             adicionar() {
                 this.$router.push({ name: 'cadastrar_pedido' })
-            }
+            }            
         }
     };
 </script>

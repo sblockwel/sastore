@@ -64,7 +64,7 @@ const routes = [
                 component: ItemPedido
             },
             {
-                path: 'item',
+                path: 'item/:numero',
                 name: 'adicionar_item',
                 component: ItemPedido
             }
