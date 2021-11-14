@@ -4,6 +4,16 @@ import App from './App.vue';
 
 // router setup
 import routes from './routes'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSortUp, faSortDown, faSort, faTrash, faPencilAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faSortUp)
+library.add(faSortDown)
+library.add(faSort)
+library.add(faTrash)
+library.add(faPencilAlt)
+library.add(faCheck)
 
 // configure router
 const router = VueRouter.createRouter({
@@ -19,5 +29,6 @@ const router = VueRouter.createRouter({
     }
 })
 Vue.createApp(App)
+    .component('fa-icon', FontAwesomeIcon)
     .use(router)
     .mount('#app');

@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="d-flex justify-content-start p-4">
         <form v-on:submit.prevent="salvar">
             <input type="hidden" v-model="cliente.id" />
-            <div class="form-group">
-                <label for="cliente_nome">Nome do cliente</label>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Nome do cliente: </span>
                 <input v-model="cliente.nome" />
             </div>
             <div class="form-group">

@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <div class="form-group">
-            <label for="produto"> Produto: </label>
+    <div class="d-flex justify-content-start p-4">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Produto:</span>
             <select :readonly="item.id > 0" v-model="item.produto">
                 <option v-for="produto in produto_list" :key="produto.id" :value="produto">
                     {{ produto.nome }}
                 </option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="quantidade"> Quantidade: </label>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Quantidade:</span>
             <input v-model="item.quantidade" type="number" />
         </div>
         <div class="form-group">

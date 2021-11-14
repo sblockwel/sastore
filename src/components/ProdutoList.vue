@@ -1,28 +1,34 @@
 <template>
-    <div class="container">
-        <meta charset="utf-8">
+    <div>
 
-        <table class="table table-dark table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="produto in produto_list" :key="produto.id">
-                    <th scope="row">{{ produto.id }}</th>
-                    <td>{{ produto.nome }}</td>
-                    <td>{{ produto.preco }}</td>
-                    <td>
-                        <button @click="remover(produto.id)"> <font-awesome-icon data-feather="trash" />Excluir</button>
-                        <button @click="alterar(produto.id)"> <font-awesome-icon icon="edit" />Editar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="d-flex justify-content-start pt-4 px-4">
+            <meta charset="utf-8">
+
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Preco</th>
+                        <th scope="col">Acoes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="produto in produto_list" :key="produto.id">
+                        <th scope="row">{{ produto.id }}</th>
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.preco }}</td>
+                        <td>
+                            <button @click="remover(produto.id)"> <fa-icon icon="trash" /></button>
+                            <button @click="alterar(produto.id)"> <fa-icon icon="pencil-alt" /></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mx-auto d-flex justify-content-start px-4">
+            <button class="btn btn-primary" @click="adicionar()">Cadastrar produto</button>
+        </div>
     </div>
 </template>
 
@@ -45,6 +51,9 @@
             }
         },
         methods: {
+            adicionar() {
+                this.$router.push({ name: 'cadastrar_produto' });
+            },
             remover(id) {
                 axios.delete("http://192.168.1.22:8080/produto/" + id)
                     .catch(error => alert(error));

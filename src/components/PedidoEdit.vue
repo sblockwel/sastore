@@ -1,8 +1,16 @@
 <template>
-    <div>
+    <div class="">
         <form v-on:submit.prevent="salvar">
             <input type="hidden" v-model="pedido.numero" />
         </form>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Selecione o cliente:</span>
+            <select :readonly="pedido.numero > 0" v-model="pedido.cliente">
+                <option v-for="cliente in clientes" :key="cliente.id" :value="cliente">
+                    {{ cliente.nome }}
+                </option>
+            </select>
+        </div>
         <table class="table table-dark table-striped">
             <thead>
                 <tr>
@@ -41,16 +49,8 @@
                     "cliente": {}
                 },
                 itemSelected: {},
-                itens: [
-                    {
-                        pedido: 0,
-                        quantidade: 0,
-                        produto: {
-                            "id": 0,
-                            "nome": ""
-                        }
-                    },
-                ]
+                itens: [],
+                clientes: []
             };
         },
         computed: {
@@ -63,21 +63,47 @@
         },
         mounted() {
             console.log(this.$route.params);
-            if (this.$route.params.id != null) {
-                axios.get('http://192.168.1.22:8080/pedido/' + this.$route.params.id)
-                    .then(x => this.pedido = x.data);
-                axios.get('http://192.168.1.22:8080/pedido/itens/' + this.$route.params.id)
-                    .then(res => this.itens = res.data);
-
-            }
+            axios.get('http://192.168.1.22:8080/cliente/')
+                .then(res => {
+                    this.clientes = res.data;
+                    if (this.$route.params.id != null) {
+                        let id = this.$route.params.id
+                        axios.get('http://192.168.1.22:8080/pedido/' + id)
+                            .then(x => {
+                                this.pedido = x.data;
+                                console.log(x.data);
+                                axios.get('http://192.168.1.22:8080/pedido/itens/' + id)
+                                    .then(res => this.itens = res.data);
+                            });
+                    }
+                });
         },
         methods: {
             isEditable(idx) {
                 return idx == this.alteracaoIdx;
             },
-            novo() {
-                let numero = this.pedido.numero;
+            editPedido(numero) {
                 this.$router.push({ name: 'adicionar_item', params: { numero } });
+            },
+            novo() {
+                if (this.pedido.numero == 0) {
+                    if (this.pedido.cliente == null || this.pedido.cliente.id == 0 || this.pedido.cliente.id == undefined) {
+                        alert('Nenhum cliente selecionado!')
+                        return;
+                    }
+                    let data = {
+                        "cliente": this.pedido.cliente.id,
+                        "dataEmissao": new Date()
+                    }
+                    axios.post('http://192.168.1.22:8080/pedido/', data)
+                        .then(response => {
+                            this.pedido.id = response.data.id;
+                            this.pedido.numero = response.data.numero;
+                        })
+                        .finally(() => this.editPedido(this.pedido.numero));
+                } else {
+                    this.editPedido(this.pedido.numero);
+                }
             },
             editar(idx) {
                 this.itemSelected = Object.assign({}, this.itens[idx])

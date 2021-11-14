@@ -24,7 +24,12 @@ const routes = [
                 component: ProdutoList
             },
             {
-                path: 'produto_edit',
+                path: 'produto',
+                name: 'cadastrar_produto',
+                component: ProdutoEdit
+            },
+            {
+                path: 'produto/:id',
                 name: 'editar_produto',
                 component: ProdutoEdit
             },
@@ -40,7 +45,7 @@ const routes = [
             },
             {
                 path: 'cliente',
-                name: 'cadastro_cliente',
+                name: 'cadastrar_cliente',
                 component: ClientEdit
             },
             {

@@ -12,7 +12,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/produto_edit">
+                                <a class="nav-link" href="/produto">
                                     <span data-feather="file"></span>
                                     Cadastrar produto
                                 </a>

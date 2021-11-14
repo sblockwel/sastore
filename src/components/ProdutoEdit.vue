@@ -1,17 +1,17 @@
 <template>
-    <div>
+    <div class="d-flex justify-content-start p-4">
         <meta charset="utf-8">
         <form v-on:submit.prevent="salvar">
             <input hidden v-model="produto.id" />
-            <div class="form-group">
-                <label for="produto_nome">Nome do produto</label>
-                <input v-model="produto.nome" />
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Nome do produto</span>
+                <input class="form-control" v-model="produto.nome" />
             </div>
-            <div class="form-group">
-                <label for="produto_valor">Valor do produto</label>
-                <input v-model="produto.preco" />
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-lg">Valor do produto</span>
+                <input class="form-control" v-model="produto.preco" />
             </div>
-            <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
                 <button id="btn_save" class="btn btn-primary"> {{ acao }}</button>
             </div>
         </form>
