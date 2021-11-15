@@ -54,7 +54,7 @@
                 this.$router.push({ name: 'cadastrar_cliente' });
             },
             async remover(id) {
-                await axios.delete(`${config.APIURL}/cliente` + id)
+                await axios.delete(`${config.APIURL}/cliente/${id}`)
                     .catch(error => alert(error))
                     .finally(async () => await this.carregarClientes());
             },
