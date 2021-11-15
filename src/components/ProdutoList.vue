@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div class="d-flex justify-content-start pt-4 px-4">
             <meta charset="utf-8">
 
@@ -41,24 +40,27 @@
                 produto_list: []
             };
         },
-        mounted() {
+        async mounted() {
             try {
-                axios.get('http://192.168.1.22:8080/produto')
-                    .then(x => this.produto_list = x.data);
+                await this.carregarProdutos();
                 console.log(this.produto_list);
             } catch (e) {
                 console.error(e);
             }
         },
         methods: {
+            async carregarProdutos() {
+                return new Promise(() => axios.get('http://192.168.1.22:8080/produto')
+                    .then(x => this.produto_list = x.data)
+                    .catch(error => console.error(error)));
+            },
             adicionar() {
                 this.$router.push({ name: 'cadastrar_produto' });
             },
-            remover(id) {
+            async remover(id) {
                 axios.delete("http://192.168.1.22:8080/produto/" + id)
-                    .catch(error => alert(error));
-                axios.get('http://192.168.1.22:8080/produto')
-                    .then(x => this.produto_list = x.data);
+                    .catch(error => alert(error))
+                    .finally(async () => await this.carregarProdutos());
             },
             alterar(id) {
                 this.$router.push({ name: 'editar_produto', params: { id } });

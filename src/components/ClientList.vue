@@ -36,24 +36,26 @@
                 cliente_list: []
             };
         },
-        mounted() {
+        async mounted() {
             try {
-                axios.get('http://192.168.1.22:8080/cliente')
-                    .then(x => this.cliente_list = x.data);
-                console.log(this.cliente_list);
+                await this.carregarClientes();
             } catch (e) {
                 console.error(e);
             }
         },
         methods: {
+            async carregarClientes() {
+                return new Promise(() => axios.get('http://192.168.1.22:8080/cliente')
+                    .then(response => this.cliente_list = response.data)
+                    .catch(error => console.error(error)));
+            },
             adicionar() {
                 this.$router.push({ name: 'cadastrar_cliente' });
             },
-            remover(id) {
-                axios.delete("http://192.168.1.22:8080/cliente/" + id)
-                    .catch(error => alert(error));
-                axios.get('http://192.168.1.22:8080/cliente')
-                    .then(x => this.cliente_list = x.data);
+            async remover(id) {
+                await axios.delete("http://192.168.1.22:8080/cliente/" + id)
+                    .catch(error => alert(error))
+                    .finally(async () => await this.carregarClientes());
             },
             alterar(id) {
                 this.$router.push({ name: 'editar_cliente', params: { id } });

@@ -16,7 +16,7 @@
                         <th scope="row">{{ pedido.cliente.nome }}</th>
                         <td scope="row">{{ pedido.valorTotal }}</td>
                         <td>
-                            <button @click="remover(pedido.id)"> <fa-icon icon="trash"/></button>
+                            <button @click="remover(pedido.id)"> <fa-icon icon="trash" /></button>
                             <button @click="alterar(pedido.id)"> <fa-icon icon="pencil-alt" /></button>
                         </td>
                     </tr>
@@ -38,22 +38,24 @@
                 pedido_list: []
             };
         },
-        mounted() {
+        async mounted() {
             try {
-                axios.get('http://192.168.1.22:8080/pedido')
-                    .then(x => {
-                        this.pedido_list = x.data;
-                    });
+                await this.carregarPedidos();
                 console.log(this.pedido_list);
             } catch (e) {
                 console.error(e);
             }
         },
         methods: {
-            remover(id) {
+            async carregarPedidos() {
+                return new Promise(() => axios.get('http://192.168.1.22:8080/pedido')
+                    .then(x => this.pedido_list = x.data)
+                    .catch(error => console.error(error)));
+            },
+            async remover(id) {
                 axios.delete("http://192.168.1.22:8080/pedido/" + id)
                     .catch(error => alert(error))
-                    .finally(() => this.$router.go());
+                    .finally(() => this.carregarPedidos());
             },
             alterar(id) {
                 this.$router.push({ name: 'editar_pedido', params: { id } });
