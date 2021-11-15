@@ -28,7 +28,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
+    import config from '../config.js';
     export default {
         name: 'Lista de clientes',
         data() {
@@ -45,7 +46,7 @@
         },
         methods: {
             async carregarClientes() {
-                return new Promise(() => axios.get('http://192.168.1.22:8080/cliente')
+                return new Promise(() => axios.get(`${config.APIURL}/cliente`)
                     .then(response => this.cliente_list = response.data)
                     .catch(error => console.error(error)));
             },
@@ -53,7 +54,7 @@
                 this.$router.push({ name: 'cadastrar_cliente' });
             },
             async remover(id) {
-                await axios.delete("http://192.168.1.22:8080/cliente/" + id)
+                await axios.delete(`${config.APIURL}/cliente` + id)
                     .catch(error => alert(error))
                     .finally(async () => await this.carregarClientes());
             },

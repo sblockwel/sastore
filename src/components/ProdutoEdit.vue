@@ -20,6 +20,7 @@
 
 <script>
     import axios from 'axios';
+    import config from '../config.js';
     export default {
         name: 'Cadastro de produto',
         data() {
@@ -35,14 +36,14 @@
         mounted() {
             console.log(this.$route.params);
             if (this.$route.params.id != null) {
-                axios.get('http://192.168.1.22:8080/produto/' + this.$route.params.id)
+                axios.get(`${config.APIURL}/produto/${this.$route.params.id}`)
                     .then(x => this.produto = x.data);
             }
         },
         methods: {
             salvar() {
                 if (this.produto.id > 0) {
-                    axios.put('http://192.168.1.22:8080/produto/' + this.$route.params.id, this.produto)
+                    axios.put(`${config.APIURL}/produto/${this.$route.params.id}`, this.produto)
                         .then((res) => {
                             //Perform Success Action
                         })
@@ -52,7 +53,7 @@
                             this.$router.push({ name: 'listar_produtos' });
                         });
                 } else {
-                    axios.post('http://192.168.1.22:8080/produto/', this.produto)
+                    axios.post(`${config.APIURL}/produto/`, this.produto)
                         .then((res) => {
                             //Perform Success Action
                         })

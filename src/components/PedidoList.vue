@@ -30,7 +30,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
+    import config from '../config.js';
     export default {
         name: 'Lista de pedidos',
         data() {
@@ -48,12 +49,12 @@
         },
         methods: {
             async carregarPedidos() {
-                return new Promise(() => axios.get('http://192.168.1.22:8080/pedido')
+                return new Promise(() => axios.get(`${config.APIURL}/pedido`)
                     .then(x => this.pedido_list = x.data)
                     .catch(error => console.error(error)));
             },
             async remover(id) {
-                axios.delete("http://192.168.1.22:8080/pedido/" + id)
+                axios.delete(`${config.APIURL}/pedido/${id}`)
                     .catch(error => alert(error))
                     .finally(() => this.carregarPedidos());
             },

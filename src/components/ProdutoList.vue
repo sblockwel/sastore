@@ -32,7 +32,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
+    import config from '../config.js';
     export default {
         name: 'Lista de produtos',
         data() {
@@ -50,7 +51,7 @@
         },
         methods: {
             async carregarProdutos() {
-                return new Promise(() => axios.get('http://192.168.1.22:8080/produto')
+                return new Promise(() => axios.get(`${config.APIURL}/produto`)
                     .then(x => this.produto_list = x.data)
                     .catch(error => console.error(error)));
             },
@@ -58,7 +59,7 @@
                 this.$router.push({ name: 'cadastrar_produto' });
             },
             async remover(id) {
-                axios.delete("http://192.168.1.22:8080/produto/" + id)
+                axios.delete(`${config.APIURL}/produto/${id}`)
                     .catch(error => alert(error))
                     .finally(async () => await this.carregarProdutos());
             },

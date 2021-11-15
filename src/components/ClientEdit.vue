@@ -15,6 +15,7 @@
 
 <script>
     import axios from 'axios';
+    import config from '../config.js';
     export default {
         name: 'Cadastro de cliente',
         data() {
@@ -33,14 +34,14 @@
         mounted() {
             console.log(this.$route.params);
             if (this.$route.params.id != null) {
-                axios.get('http://192.168.1.22:8080/cliente/' + this.$route.params.id)
+                axios.get(`${config.APIURL}/cliente` + this.$route.params.id)
                     .then(x => this.cliente = x.data);
             }
         },
         methods: {
             salvar() {
                 if (this.cliente.id > 0) {
-                    axios.put('http://192.168.1.22:8080/cliente/' + this.$route.params.id, this.cliente)
+                    axios.put(`${config.APIURL}/cliente` + this.$route.params.id, this.cliente)
                         .then((res) => {
                             //Perform Success Action
                         })
@@ -50,7 +51,7 @@
                             this.$router.push({ name: 'listar_clientes' });
                         });
                 } else {
-                    axios.post('http://192.168.1.22:8080/cliente/', this.cliente)
+                    axios.post(`${config.APIURL}/cliente`, this.cliente)
                         .then((res) => {
                             //Perform Success Action
                         })

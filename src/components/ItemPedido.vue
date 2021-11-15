@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-start p-4">
+    <div class="justify-content-start p-4">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-lg">Produto:</span>
             <select :readonly="item.id > 0" v-model="item.produto">
@@ -20,6 +20,7 @@
 
 <script>
     import axios from 'axios';
+    import config from '../config.js';
     export default {
         name: 'item-pedido',
         data() {
@@ -50,11 +51,11 @@
             }
         },
         mounted() {
-            axios.get('http://192.168.1.22:8080/produto/')
+            axios.get(`${config.APIURL}/produto`)
                 .then(response => this.produto_list = response.data);
             if (this.$route.params.id != null) {
                 try {
-                    axios.get('http://192.168.1.22:8080/item/' + this.$route.params.id)
+                    axios.get(`${config.APIURL}/item/${this.$route.params.id}`)
                         .then(x => this.item = x.data);
                     console.log(this.item);
                 } catch (e) {
@@ -71,7 +72,7 @@
                     return;
                 }
                 if (this.item.id > 0) {
-                    axios.put('http://192.168.1.22:8080/item/' + this.item.id, this.item)
+                    axios.put(`${config.APIURL}/item/${this.$route.params.id}`, this.item)
                         .then((res) => {
                             //Perform Success Action
                         })
@@ -88,7 +89,7 @@
                         'quantidade': this.item.quantidade,
                         'produto': this.item.produto.id
                     }
-                    axios.post('http://192.168.1.22:8080/item/', data)
+                    axios.post(`${config.APIURL}/item/`, data)
                         .then((res) => {
                             //Perform Success Action
                         })
@@ -106,7 +107,7 @@
 
 <style scoped>
     select[readonly] {
-        background: #eee; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+        background: #eee; /*Simular campo inativo - Sugestï¿½o @GabrielRodrigues*/
         pointer-events: none;
         touch-action: none;
     }

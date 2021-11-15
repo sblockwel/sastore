@@ -37,6 +37,7 @@
 
 <script>
     import axios from 'axios';
+    import config from '../config.js';
     export default {
         name: 'Cadastro de pedido',
         components: {
@@ -61,16 +62,16 @@
         },
         mounted() {
             console.log(this.$route.params);
-            axios.get('http://192.168.1.22:8080/cliente/')
+            axios.get(`${config.APIURL}/cliente/`)
                 .then(res => {
                     this.clientes = res.data;
                     if (this.$route.params.id != null) {
                         let id = this.$route.params.id
-                        axios.get('http://192.168.1.22:8080/pedido/' + id)
+                        axios.get(`${config.APIURL}/pedido/${id}`)
                             .then(x => {
                                 this.pedido = x.data;
                                 console.log(x.data);
-                                axios.get('http://192.168.1.22:8080/pedido/itens/' + id)
+                                axios.get(`${config.APIURL}/pedido/itens/${id}`)
                                     .then(res => this.itens = res.data);
                             });
                     }
@@ -96,7 +97,7 @@
                         "cliente": this.pedido.cliente.id,
                         "dataEmissao": new Date()
                     }
-                    axios.post('http://192.168.1.22:8080/pedido/', data)
+                    axios.post(`${config.APIURL}/pedido/`, data)
                         .then(response => {
                             this.pedido.id = response.data.id;
                             this.pedido.numero = response.data.numero;
@@ -111,12 +112,12 @@
                 let quantidade = window.prompt("Digite a quantidade desejada: ", this.itemSelected.quantidade);
                 try {
                     if (quantidade == null || quantidade == "") {
-                        console.log("Edição cancelada;");
+                        console.log("EdiÃ§Ã£o cancelada;");
                     } else {
                         this.itemSelected.quantidade = parseInt(quantidade);
                         this.itens[idx] = this.itemSelected;
 
-                        axios.put('http://192.168.1.22:8080/item/' + this.itemSelected.id, this.itemSelected)
+                        axios.put(`${config.APIURL}/item/${this.itemSelected.id}`, this.itemSelected)
                             .then((res) => {
                                 //Perform Success Action
                             })
@@ -134,7 +135,7 @@
 
             },
             excluir(id) {
-                axios.delete('http://192.168.1.22:8080/item/' + id)
+                axios.delete(`${config.APIURL}/item/${id}`)
                     .then((res) => {
                         //Perform Success Action
                     })
@@ -147,7 +148,7 @@
             },
             salvar() {
                 if (this.pedido.id > 0) {
-                    axios.put('http://192.168.1.22:8080/pedido/' + this.$route.params.id, this.pedido)
+                    axios.put(`${config.APIURL}/pedido/${this.$route.params.id}`, this.pedido)
                         .then((res) => {
                             //Perform Success Action
                         })
@@ -157,7 +158,7 @@
                             this.$router.push({ name: 'listar_pedidos' });
                         });
                 } else {
-                    axios.post('http://192.168.1.22:8080/pedido/', this.pedido)
+                    axios.post(`${config.APIURL}/pedido/`, this.pedido)
                         .then((res) => {
                             //Perform Success Action
                         })
