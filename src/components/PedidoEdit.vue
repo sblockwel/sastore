@@ -25,8 +25,8 @@
                     <th scope="row">{{ item.produto.nome }}</th>
                     <td :contenteditable="isEditable(idx)" scope="row" id="qtd_produto">{{ item.quantidade }} </td>
                     <td>
-                        <button @click.prevent="excluir(item.id)"> <fa-icon icon="trash" /></button>
-                        <button @click="editar(idx)"> <fa-icon :icon="icon(idx)" /></button>
+                        <button @click.prevent="excluir(item.id)"> <fa-icon icon="trash" color="darkred" /></button>
+                        <button @click="editar(idx)"> <fa-icon :icon="icon(idx)" color="darkgreen" /></button>
                     </td>
                 </tr>
             </tbody>

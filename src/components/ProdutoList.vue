@@ -18,8 +18,8 @@
                         <td>{{ produto.nome }}</td>
                         <td>{{ produto.preco }}</td>
                         <td>
-                            <button @click="remover(produto.id)"> <fa-icon icon="trash" /></button>
-                            <button @click="alterar(produto.id)"> <fa-icon icon="pencil-alt" /></button>
+                            <button @click="remover(produto.id)"> <fa-icon icon="trash" color="darkred"/></button>
+                            <button @click="alterar(produto.id)"> <fa-icon icon="pencil-alt" color="darkgreen" /></button>
                         </td>
                     </tr>
                 </tbody>

@@ -12,12 +12,12 @@
                 </thead>
                 <tbody>
                     <tr v-for="pedido in pedido_list" :key="pedido.numero">
-                        <th scope="row">{{ pedido.numero }}</th>
-                        <th scope="row">{{ pedido.cliente.nome }}</th>
+                        <td scope="row">{{ pedido.numero }}</td>
+                        <td scope="row">{{ pedido.cliente.nome }}</td>
                         <td scope="row">{{ pedido.valorTotal }}</td>
                         <td>
-                            <button @click="remover(pedido.id)"> <fa-icon icon="trash" /></button>
-                            <button @click="alterar(pedido.id)"> <fa-icon icon="pencil-alt" /></button>
+                            <button @click="remover(pedido.id)"> <fa-icon icon="trash" color="darkred"/></button>
+                            <button @click="alterar(pedido.id)"> <fa-icon icon="pencil-alt" color="darkgreen" /></button>
                         </td>
                     </tr>
                 </tbody>

@@ -14,8 +14,8 @@
                         <th scope="row">{{ cliente.id }}</th>
                         <td>{{ cliente.nome }}</td>
                         <td>
-                            <button @click="remover(cliente.id)"> <fa-icon icon="trash" /></button>
-                            <button @click="alterar(cliente.id)"> <fa-icon icon="pencil-alt" /></button>
+                            <button @click="remover(cliente.id)"> <fa-icon icon="trash" color="darkred" /></button>
+                            <button @click="alterar(cliente.id)"> <fa-icon icon="pencil-alt" color="darkgreen"/></button>
                         </td>
                     </tr>
                 </tbody>
