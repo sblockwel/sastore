@@ -19,7 +19,6 @@
     "bootstrap": "^5.1.3",
     "core-js": "^3.19.1",
     "vue": "^3.0.0",
-    "vue-feather": "2.0.0-rc",
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
