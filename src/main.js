@@ -4,13 +4,11 @@ import App from './App.vue';
 
 // router setup
 import routes from './routes'
+// configuracao dos icones
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSortUp, faSortDown, faSort, faTrash, faPencilAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPencilAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faSortUp)
-library.add(faSortDown)
-library.add(faSort)
 library.add(faTrash)
 library.add(faPencilAlt)
 library.add(faCheck)
