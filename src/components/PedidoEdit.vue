@@ -16,7 +16,7 @@
                 <tr>
                     <th scope="col">Nome do produto</th>
                     <th scope="col">Quantidade</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Acoes</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,8 +25,8 @@
                     <th scope="row">{{ item.produto.nome }}</th>
                     <td :contenteditable="isEditable(idx)" scope="row" id="qtd_produto">{{ item.quantidade }} </td>
                     <td>
-                        <button @click.prevent="excluir(item.id)"> <font-awesome-icon data-feather="trash" />Excluir</button>
-                        <button @click="editar(idx)"> <font-awesome-icon icon="edit" />{{ editing }}</button>
+                        <button @click.prevent="excluir(item.id)"> <fa-icon icon="trash" /></button>
+                        <button @click="editar(idx)"> <fa-icon :icon="icon(idx)" /></button>
                     </td>
                 </tr>
             </tbody>
@@ -50,15 +50,13 @@
                 },
                 itemSelected: {},
                 itens: [],
-                clientes: []
+                clientes: [],
+                show: false
             };
         },
         computed: {
             acao() {
                 return this.pedido.numero > 0 ? "Salvar" : "Cadastrar";
-            },
-            editing() {
-                return this.alteracaoIdx > -1 ? "Salvar" : "Editar";
             }
         },
         mounted() {
@@ -79,6 +77,9 @@
                 });
         },
         methods: {
+            icon(idx) {
+                return idx > -1 ? "pencil-alt" : "check";
+            },
             isEditable(idx) {
                 return idx == this.alteracaoIdx;
             },
