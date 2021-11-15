@@ -6,12 +6,16 @@ import App from './App.vue';
 import routes from './routes'
 // configuracao dos icones
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrash, faPencilAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPencilAlt, faCheck, faStore, faUsers, faShoppingCart, faTags} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faTrash)
 library.add(faPencilAlt)
 library.add(faCheck)
+library.add(faStore)
+library.add(faUsers)
+library.add(faShoppingCart)
+library.add(faTags)
 
 // configure router
 const router = VueRouter.createRouter({
